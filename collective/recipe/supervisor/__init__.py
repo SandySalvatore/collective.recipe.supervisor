@@ -43,9 +43,9 @@ class ProgramSpecParser(object):
     def _next_token(self, *args):
         try:
             if len(self._putback_buffer) == 0:
-                t = self.s.next()
+                t = next(self.s)
                 d = t.groupdict()
-                k = [k for k, v in d.items() if v is not None][0]
+                k = [k for k, v in list(d.items()) if v is not None][0]
                 if k in args:
                     return k, d[k]
             else:
